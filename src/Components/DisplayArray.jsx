@@ -109,16 +109,9 @@ export default function DisplayArray({
     }
   };
 
-  const handleClick = (setQuicktest) => {
-    setQuicktest(false);
-    
-    setResult([]);
-  };
 
-  const spinStyle = {
-    transition: 'transform 1s linear',
-    transform: isSpinning ? 'rotate(360deg)' : 'none',
-  };
+
+  
 
   const getStatusClass = (status) => {
     switch (status) {
@@ -140,9 +133,7 @@ export default function DisplayArray({
       <div className="flex justify-between items-center gap-4 text-base font-semibold mb-4">
         <div className="flex items-center gap-2">
           <h1 className='text-base text-gray-900'>Test Cases and Outputs</h1>
-          <button onClick={() => handleClick(setQuicktest) } className="w-8 h-8 hover:bg-gray-200 rounded-md flex items-center justify-center">
-            <FontAwesomeIcon icon={faRedo} className={`text-gray-700 ${isSpinning ? 'animate-spin-once' : ''}`} style={spinStyle} />
-          </button>
+         
           
         </div>
         <button

@@ -22,13 +22,13 @@ const FeedbackForm = () => {
       });
       setIsloading(false);
       showToast('Feedback submitted Successfully', 'success')
-      console.log('Feedback stored successfully');
+   
       setName('');
       setEmail('');
       setFeedback('');
     } catch (error) {
        setIsloading(false);
-      console.error('Error storing feedback:', error);
+  
     }
   };
 

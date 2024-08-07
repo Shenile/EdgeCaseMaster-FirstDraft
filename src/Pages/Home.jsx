@@ -1,7 +1,7 @@
 import React from 'react'
-import Logo from '../assets/Logo';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faChevronRight, faArrowLeft, faArrowRight, faArrowCircleLeft, faArrowCircleRight } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight} from '@fortawesome/free-solid-svg-icons';
 import FeatureList from '../Components/Home/Features';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../Components/Footer';
@@ -43,7 +43,7 @@ export default function Home() {
      
       </div>
 
-      <div className='md:mb-12'>
+      <div className='mb-12'>
         <FeatureList contents={features}/>
       </div>
 

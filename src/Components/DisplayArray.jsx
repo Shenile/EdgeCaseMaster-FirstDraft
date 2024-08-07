@@ -15,7 +15,7 @@ export default function DisplayArray({
   setInputCollection, setOutputCollection, code, 
   setResult, setQuicktest, isQuicktest, isloading, setIsLoading 
 }) {
-  const [isSpinning, setIsSpinning] = useState(false);
+
   const [statuses, setStatuses] = useState([]);
   const [editIndex, setEditIndex] = useState(null); 
   const [editInput, setEditInput] = useState('');
@@ -23,7 +23,7 @@ export default function DisplayArray({
   const [shouldRunTests, setShouldRunTests] = useState(false);
 
 
-  console.log(isloading)
+
 
   useEffect(() => {
     updateStatuses();
@@ -57,7 +57,7 @@ export default function DisplayArray({
         setIsLoading(false);
         showToast(response.error, 'error');
     } else {
-        console.log(response.data.results);
+      
         
         setResult(response.data.results);
         setQuicktest(false);
@@ -84,7 +84,7 @@ export default function DisplayArray({
   };
 
   const handleUpdate = async() => {
-    console.log('i am clicked')
+
     if (editIndex !== null) {
       const { parsedInput, parsedOutput, error } = parseData(editInput, editOutput);
       if (parsedInput && parsedOutput) {
@@ -143,7 +143,7 @@ export default function DisplayArray({
             setResult([]);
             setQuicktest(false);
           }}
-          className="  md:px-3 md:py-1 text-base text-white bg-red-500  hover:bg-red-600 shadow-md rounded-md"
+          className="xs:px-2 xs:py-1  md:px-3 md:py-1 text-base text-white bg-red-500  hover:bg-red-600 shadow-md rounded-md"
         >
         Clear All
         </button>
@@ -271,7 +271,7 @@ export default function DisplayArray({
         
        </> 
       )}
-        <div className='w-full border border-red-500 px-4 py-2 mt-4 flex gap-4 justify-end'>
+        <div className='w-full px-4 py-2 mt-4 flex gap-4 justify-end'>
  
           
           <TestButton label="Run all tests" onClick={runAllTests} className="w-fit h-8 text-white px-2 rounded-md " />

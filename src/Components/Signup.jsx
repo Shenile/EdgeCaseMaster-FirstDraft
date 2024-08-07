@@ -5,6 +5,8 @@ import { auth } from './firebaseConfig'; // Adjust the path as needed
 import { useNavigate } from 'react-router-dom';
 import LoadingCircle from './Utils/Loading';
 import { showToast } from './toastUtils';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 
 const SignUp = () => {
@@ -25,12 +27,19 @@ const SignUp = () => {
     } catch (error) {
       // Handle error
       setLoading(false);
-      console.error("Error creating user:", error);
+      showToast(error, 'error')
     }
   };
+  
+  const handleBack = (e) => {
+    e.preventDefault();
+    navigate('/'); // Navigate to the previous page
+  };
 
+  
   return (
-    <div className="max-w-md mx-auto mt-10">
+    <div className="xs:mx-8 md:max-w-md md:mx-auto mt-10">
+      <button><FontAwesomeIcon icon={faArrowLeft} className='p-3 bg-gray-200 rounded-full mb-4' onClick={handleBack} /></button>
       <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">

@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 
 export const showToast = (message, type = 'info') => {
   let className = 'z-50';
-  console.log(message, 'I am executed')
+
   switch (type) {
     case 'success':
       className = 'shadow-md  text-green';

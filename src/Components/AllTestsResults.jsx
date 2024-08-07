@@ -3,7 +3,7 @@ import TestCaseList from './TestCaseList';
 
 export default function AllTestsResults({ result }) {
    
-  console.log('quicktest and results', result, )
+
   const {testSummary } = result;
 
   console.log('result and text summary from quicktestresult', testSummary)

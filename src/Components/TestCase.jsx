@@ -26,21 +26,20 @@ export default function TestCase({ setInput, setOutput, inputCollection, outputC
         showToast(error, 'error');
     }
 
-    console.log('inputCollection:', inputCollection);
-    console.log('outputCollection:', outputCollection);
+   
   };
 
   const handleQuickTest = async (code, input, output) => {
     try {
         if (input && output && code) {
              
-            console.log("I am executed");
+           
             setIsLoading(true);
             const response = await runTests(code, input, output);
             
             if (response.error) {
               setIsLoading(false);
-              console.log('i am the error')
+            
               showToast(response.error, 'error');
             } else {
                 setIsLoading(false);
@@ -54,7 +53,7 @@ export default function TestCase({ setInput, setOutput, inputCollection, outputC
         }
     } catch (err) {
       setIsLoading(false);
-      console.log('i am the error')
+ 
         showToast(err.message, 'error');
     }
 };

@@ -3,7 +3,6 @@ import TestCaseCard from './TestCaseCards';
 
 const TestCaseList = ({ results = [], testSummary = {} }) => {
 
-  console.log('results from testcase list:', results)
   const { test_inputs: inputs = [], test_outputs: expectedOutputs = [] } = testSummary;
 
   return (

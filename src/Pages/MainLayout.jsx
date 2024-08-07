@@ -16,8 +16,7 @@ import SignUp from '../Components/Signup';
 export default function MainLayout() {
     const [showNavbar, setShowNavbar] = useState(true);
     const currentRoute = useCurrentRoute();
-    console.log(currentRoute)
-    // Define styles for different routes
+   
     const getContainerStyle = () => {
       switch (currentRoute) {
         case '/':
@@ -43,7 +42,7 @@ export default function MainLayout() {
 
   return (
     <div className="flex flex-col md:h-screen xs:h-auto">
-        {/* Conditionally render Navbar */}
+        
       {!hideNavbarRoutes.includes(location.pathname) && (
         <div>
           <Navbar />

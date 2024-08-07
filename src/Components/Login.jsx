@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { showToast } from './toastUtils';
 import LoadingCircle from './Utils/Loading';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faArrowRight, faArrowCircleLeft, faArrowCircleRight } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -29,7 +29,7 @@ const Login = () => {
     } catch (error) {
       setLoading(false);
       let errorMessage = 'An error occurred';
-      console.log(error.code, errorMessage)
+  
       switch (error.code) {
         case 'auth/invalid-credential':
           errorMessage = 'Invalid email address / password';
@@ -50,7 +50,7 @@ const Login = () => {
           errorMessage = error.message;
       }
       showToast(errorMessage, 'error');
-      console.error("Error signing in:", error);
+    
     }
   };
   
@@ -58,8 +58,10 @@ const Login = () => {
     e.preventDefault();
     navigate('/'); // Navigate to the previous page
   };
+
+  
   return (
-    <div className="max-w-md mx-auto mt-10">
+    <div className="xs:mx-8 md:max-w-md md:mx-auto mt-10">
       <button><FontAwesomeIcon icon={faArrowLeft} className='p-3 bg-gray-200 rounded-full mb-4' onClick={handleBack} /></button>
       <h2 className="text-2xl font-bold mb-4">Login</h2>
       <form onSubmit={handleSubmit}>
@@ -99,7 +101,7 @@ const Login = () => {
        
       </form>
 
-      <div className='flex gap-4 justify-center p-4'>
+      <div className='xs:flex xs:flex-col xs:items-center md:flex md:gap-4 justify-center p-4'>
             <p >Don't Have an account ? </p>
             <button className='text-red-500 hover:text-red-600 underline' onClick={()=> navigate('/signup')}>Sign up</button>
         </div>

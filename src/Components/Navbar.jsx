@@ -26,7 +26,7 @@ const Navbar = () => {
       showToast('Logged out Successfully', 'success');
       navigate('/');
     } catch (error) {
-      console.error('Failed to logout:', error);
+      showToast(error, 'error');
     }
   };
 
@@ -34,7 +34,7 @@ const Navbar = () => {
     try {
       navigate('/login');
     } catch (error) {
-      console.error('Failed to navigate:', error);
+      showToast(error, 'error');
     }
   };
 

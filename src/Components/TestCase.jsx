@@ -81,8 +81,8 @@ export default function TestCase({ setInput, setOutput, inputCollection, outputC
         />
       </div>
 
-      <div className='w-full px-4 py-2 mt-4 flex gap-4 justify-end'>
-        <button onClick={() => handleQuickTest(code, input, output)} className='w-fit h-8 px-1 pr-2 bg-blue-600 hover:bg-blue-700 text-white text-base rounded-md' >
+      <div className='w-full px-4 py-2 mt-4  xs:flex-row xs:items-center  md:flex md:gap-4 md:justify-end '>
+        <button onClick={() => handleQuickTest(code, input, output)} className='w-fit h-8 px-1 pr-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md xs:mb-4 md:mb-0 md:text-base' >
         <FontAwesomeIcon icon={faTachometerAlt} className='px-2'/>Quick test
         </button>
         

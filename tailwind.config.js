@@ -37,7 +37,7 @@ export default {
         'code': ['Fira Code', 'monospace']
       }, 
       screens: {
-        'xs': '380px', // Define the custom breakpoint for extra small screens
+        'xs': '280px', // Define the custom breakpoint for extra small screens
       },
     },
   },

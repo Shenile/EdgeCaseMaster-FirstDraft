@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import  Home from './Home';
 import Documentation from './Documentation';
 import About from './About'
@@ -8,9 +8,13 @@ import useCurrentRoute from '../hooks/useCurrentRoute';
 import Navbar from '../Components/Navbar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import WorkSpace from './WorkSpace';
+import PrivateRoute from '../Components/PrivateRoute'; // Adjust the path as needed
+
+import Login from '../Components/Login';
+import SignUp from '../Components/Signup';
 
 export default function MainLayout() {
-
+    const [showNavbar, setShowNavbar] = useState(true);
     const currentRoute = useCurrentRoute();
     console.log(currentRoute)
     // Define styles for different routes
@@ -29,19 +33,36 @@ export default function MainLayout() {
       }
     };
 
+  const hideNavbarRoutes = ['/login', '/signup'];
+  
+
+  useEffect(() => {
+    setShowNavbar(!hideNavbarRoutes.includes(location.pathname));
+  }, [location.pathname]);
+
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col md:h-screen xs:h-auto">
+        {/* Conditionally render Navbar */}
+      {!hideNavbarRoutes.includes(location.pathname) && (
         <div>
-        <Navbar />
+          <Navbar />
         </div>
+      )}
         <div className={`flex-grow ${getContainerStyle()}`}>
         <ToastContainer/>
         <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/documentation" element={<Documentation />} />
-        <Route path="/workspace" element={<WorkSpace />} />
+        
+        
         <Route path="/about" element={<About />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        
+        <Route element={<PrivateRoute />}>
+            <Route path="/workspace" element={<WorkSpace />} />
+            <Route path="/documentation" element={<Documentation />} />
+        </Route>
         </Routes>
        
         </div>

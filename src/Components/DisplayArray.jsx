@@ -8,7 +8,7 @@ import TestButton from './Utils/TestButtons';
 import { runTests } from '../services/api';
 import { parseData } from '../utils/utils';
 import QuickTestResult from './QuickTestResult';
-import LoadingCirce from './Utils/Loading';
+import LoadingCircle from './Utils/Loading';
 
 export default function DisplayArray({ 
   inputCollection, outputCollection, result, 
@@ -152,14 +152,14 @@ export default function DisplayArray({
             setResult([]);
             setQuicktest(false);
           }}
-          className="px-3 py-1 text-base text-white bg-red-500  hover:bg-red-600 shadow-md rounded-md"
+          className="  md:px-3 md:py-1 text-base text-white bg-red-500  hover:bg-red-600 shadow-md rounded-md"
         >
-          Clear All
+        Clear All
         </button>
       </div>
       {isQuicktest ? (
         <>
-        {(isloading) ? (( <LoadingCirce/>)):(
+        {(isloading) ? (( <LoadingCircle/>)):(
           <>
         <div className='my-2 flex gap-2 items-center bg-red-500 bg-opacity-15 p-2 border rounded-md'>
         <FontAwesomeIcon icon={faInfoCircle} className='p-2 text-yellow-700 text-opacity-75'/>
@@ -175,7 +175,7 @@ export default function DisplayArray({
        
       ) : (
       <>
-       {(isloading) ? (<LoadingCirce/>): ( 
+       {(isloading) ? (<LoadingCircle/>): ( 
         <div className="flex-grow overflow-auto">
           <div className="flex flex-col flex-wrap gap-4">
             {inputCollection.map((testCase, index) => {
@@ -186,7 +186,7 @@ export default function DisplayArray({
               return (
                 <div
                   key={index}
-                  className={`flex-1 min-w-[300px] rounded-md shadow-lg p-4 border ${getStatusClass(status)}`}
+                  className={`flex-1 md:min-w-[300px] xs:min-w-[150px] rounded-md shadow-lg p-4 border ${getStatusClass(status)}`}
                 > 
 
                   <div className='flex justify-between'>
@@ -282,7 +282,7 @@ export default function DisplayArray({
       )}
         <div className='w-full border border-red-500 px-4 py-2 mt-4 flex gap-4 justify-end'>
  
-          <TestButton label="test" className="w-fit h-8 text-white px-2 rounded-md " />
+          
           <TestButton label="Run all tests" onClick={runAllTests} className="w-fit h-8 text-white px-2 rounded-md " />
         </div>
         

@@ -1,18 +1,41 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from './AuthContext';
+import { showToast } from './toastUtils';
+import BurgerMenu from './Utils/BurgerMenu';
 
 const Navbar = () => {
+  const { user, logout } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
-
+  const { pathname } = useLocation();
+  
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+    setIsMenuOpen(prev => !prev);
   };
   
   const getActiveClass = (path) => {
-    return location.pathname === path
+    return pathname === path
       ? 'font-medium text-red-500 bg-gray-100 rounded py-1 px-2 transition duration-300 ease-in-out'
       : 'font-medium text-gray-500 hover:text-gray-900 transition duration-300 ease-in-out';
+  };
+  
+  const handleLogout = async () => {
+    try {
+      await logout();
+      showToast('Logged out Successfully', 'success');
+      navigate('/');
+    } catch (error) {
+      console.error('Failed to logout:', error);
+    }
+  };
+
+  const handleSignIn = () => {
+    try {
+      navigate('/login');
+    } catch (error) {
+      console.error('Failed to navigate:', error);
+    }
   };
 
   return (
@@ -42,22 +65,30 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <div className={`hidden md:flex md:space-x-10 ${isMenuOpen ? 'block' : 'hidden'}`}>
-      <button onClick={() => navigate('/')} className={`${getActiveClass('/')}`}>
-          Home
-        </button>
-        <button onClick={() => navigate('/workspace')} className={`${getActiveClass('/workspace')}`}>
-          Workspace
-        </button>
-        <button onClick={() => navigate('/documentation')} className={`${getActiveClass('/documentation')}`}>
-          Documentation
-        </button>
-      
-        <button onClick={() => navigate('/about')} className={`${getActiveClass('/about')}`}>
-          About
-        </button>
+      <div className={` hidden md:flex md:space-x-10 ${isMenuOpen ? 'block' : 'hidden'}`}>
+        <button onClick={() => navigate('/')} className={getActiveClass('/')}>Home</button>
+        <button onClick={() => navigate('/workspace')} className={getActiveClass('/workspace')}>Workspace</button>
+        <button onClick={() => navigate('/documentation')} className={getActiveClass('/documentation')}>Documentation</button>
+        <button onClick={() => navigate('/about')} className={getActiveClass('/about')}>About</button>
       </div>
-
+      <div className="hidden md:block">
+        {user ? (
+          <button className='ml-8 text-white bg-red-500 px-3 py-1 rounded-md hover:bg-red-700 hover:text-white transition duration-300 ease-in-out' onClick={handleLogout}>
+            Logout
+          </button>
+        ) : (
+          <button className='ml-8 text-white bg-red-500 px-3 py-1 rounded-md hover:bg-red-700 hover:text-white transition duration-300 ease-in-out' onClick={handleSignIn}>
+            Sign In
+          </button>
+        )}
+      </div>
+      <BurgerMenu
+  isMenuOpen={isMenuOpen}
+  toggleMenu={toggleMenu}
+  user={user}
+  handleLogout={handleLogout}
+  handleSignIn={handleSignIn}
+/>
     </nav>
   );
 };

@@ -4,15 +4,25 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight, faArrowLeft, faArrowRight, faArrowCircleLeft, faArrowCircleRight } from '@fortawesome/free-solid-svg-icons';
 import FeatureList from '../Components/Home/Features';
 import { useNavigate } from 'react-router-dom';
+import Footer from '../Components/Footer';
 
 
 export default function Home() {
   const navigate = useNavigate();
+
+  const features = [
+    "Instant Coding Environment : Write your code and see the results immediately.",
+    "Custom Test Cases : Create and test your own test cases to ensure your code handles every scenario.",
+    "Edge Case Analysis : Get insights and suggestions on potential edge cases your code might encounter.",
+    "Robust Code Development : Enhance your coding skills by learning to write code that withstands all edge cases."
+  ];
+
+
   return (
     <div className="flex-grow lg:px-48 md:px-24 sm:px-8 xs:px-8">
 
-      <div className='flex lg:mb-8 md:mb-4 justify-center border border-gray-700'>
-        <div className='pt-28 md:pt-28 xs:pt-8 p-4 text-center mx-auto'>
+      <div className='flex lg:mb-8 md:mb-4 justify-center '>
+        <div className='pt-24 md:pt-24 xs:pt-8 p-4 text-center mx-auto'>
         
         <h2 className="text-3xl font-semibold">Welcome to EdgeCaseMaster!</h2>
         <p className="mt-4 text-lg">
@@ -33,15 +43,11 @@ export default function Home() {
      
       </div>
 
-      <div className='lg:mb-8 md:mb-4 border border-gray-600'>
-        <FeatureList/>
+      <div className='md:mb-12'>
+        <FeatureList contents={features}/>
       </div>
 
-      <footer className="lg:mt-12 md:mt-6 border border-gray-700 xs:py-4 bg-white text-gray-700 text-sm text-center">
-            <div className="container mx-auto">
-                <p>&copy; {new Date().getFullYear()} Your Company Name. All rights reserved.</p>
-            </div>
-        </footer>
+      <Footer/>
     </div>
   );
   

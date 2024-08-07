@@ -4,11 +4,11 @@ import { toast } from 'react-toastify';
 
 
 export const showToast = (message, type = 'info') => {
-  let className = '';
-
+  let className = 'z-50';
+  console.log(message, 'I am executed')
   switch (type) {
     case 'success':
-      className = 'shadow-md bg-green-500 text-white';
+      className = 'shadow-md  text-green';
       break;
     case 'error':
       className = 'shadow-2xl shadow-red-300 text-red';

@@ -90,7 +90,7 @@ const Login = () => {
       
         <button
           type="submit"
-          className={`w-full ${loading ? 'bg-white' : 'bg-red-500 hover:bg-red-600'}text-white mt-4 py-2 px-4 rounded-md  `}
+          className={`w-full ${loading ? 'bg-white' : 'bg-red-500 hover:bg-red-600'} text-white mt-4 py-2 px-4 rounded-md  `}
           
         >  { loading ? (<div className=''><LoadingCircle/></div>):
           ('Login')}

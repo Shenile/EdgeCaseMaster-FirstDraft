@@ -46,7 +46,7 @@ const AboutUs = () => {
       Please take a moment to share your thoughts and experiences.
       </Section>
 
-      <div className='m-4 md:px-32 md:py-4 md:bg-gray-100 md:border md:rounded-lg md:shadow-md'>
+      <div className='m-4 md:px-32 md:py-4 md:bg-gray-100 border border-gray-300 md:rounded-lg md:shadow-md'>
         <FeedbackForm/>
       </div>
 

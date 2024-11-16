@@ -272,8 +272,6 @@ export default function DisplayArray({
        </> 
       )}
         <div className='w-full px-4 py-2 mt-4 flex gap-4 justify-end'>
- 
-          
           <TestButton label="Run all tests" onClick={runAllTests} className="w-fit h-8 text-white px-2 rounded-md " />
         </div>
         

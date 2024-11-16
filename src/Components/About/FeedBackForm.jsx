@@ -42,7 +42,7 @@ const FeedbackForm = () => {
             id="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="mb-4 p-2 border border-gray-200 rounded w-full"
+            className="mb-4 p-2 border border-gray-300 rounded w-full"
             required
           />
         </div>
@@ -53,7 +53,7 @@ const FeedbackForm = () => {
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="mb-4 p-2 border border-gray-200 rounded w-full"
+            className="mb-4 p-2 border border-gray-300 rounded w-full"
             required
           />
         </div>
@@ -62,7 +62,7 @@ const FeedbackForm = () => {
           <textarea
             id="feedback"
             value={feedback}
-            className="mb-4 p-2 border border-gray-200 rounded w-full"
+            className="mb-4 p-2 border border-gray-300 rounded w-full"
             onChange={(e) => setFeedback(e.target.value)}
             rows="4"
             cols="50"
@@ -71,7 +71,7 @@ const FeedbackForm = () => {
         </div>
         <button
           type="submit"
-          className={`w-48 ${loading ? 'bg-white' : 'bg-red-500 '}text-white mt-4 py-2 px-4 rounded-md hover:bg-red-600 `}
+          className={`w-48 ${loading ? 'bg-white' : 'bg-red-500 text-center'} text-white mt-4 py-2 px-4 rounded-md  `}
           
         >  { loading ? (<div className=''><LoadingCircle/></div>):
           ('submit')}

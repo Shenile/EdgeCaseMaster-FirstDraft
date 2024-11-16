@@ -7,7 +7,7 @@ function FeatureList({contents}) {
   return (
     <ul className="list-disc list-inside text-lg space-y-2">
       {contents.map((content, index) => (
-        <p key={index} className='text-base'>
+        <p key={index} className='text-base md:text-md'>
           <FontAwesomeIcon icon={faChevronRight} className='mx-2 text-red-500' />
           {content}
         </p>

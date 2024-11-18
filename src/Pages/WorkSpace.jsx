@@ -22,7 +22,7 @@ export default function WorkSpace() {
         <div className="flex flex-col h-full py-2">
              
             <div className="flex flex-col md:flex-row gap-2 items-center justify-center px-4 h-full md:overflow-hidden xs:overflow-auto">
-                <div className='px-4 py-4 w-full md:w-1/2 flex flex-col gap-4 border border-gray-300 rounded-md h-full'>
+                <div className='px-4 py-4 w-full md:w-1/2 flex flex-col gap-4 border border-gray-400 rounded-md h-full'>
                     <div className='px-2 flex flex-col h-full md:overflow-hidden xs:overflow-auto'>
                         <Code_Input setCode={setCode} />
                         <TestCase
@@ -40,7 +40,7 @@ export default function WorkSpace() {
                         />
                     </div>
                 </div>
-                <div className='w-full md:w-1/2 h-full flex flex-col border border-gray-300 rounded-md md:overflow-hidden xs:overflow-auto'>
+                <div className='w-full md:w-1/2 h-full flex flex-col  rounded-md md:overflow-hidden xs:overflow-auto'>
                     <DisplayArray
                         inputCollection={inputCollection}
                         outputCollection={outputCollection}

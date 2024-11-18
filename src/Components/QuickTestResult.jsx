@@ -4,17 +4,14 @@ import TestCaseList from './TestCaseList';
 export default function QuickTestResult({ quickTestResults }) {
    
 
-  const {testSummary } = quickTestResults;
+  const {tests_summary} = quickTestResults;
 
 
 
-  return (
-
-      
+  return (    
       <TestCaseList
         results={quickTestResults.results}
-        testSummary={testSummary}
+        tests_summary={tests_summary}
       />
-
   );
 };

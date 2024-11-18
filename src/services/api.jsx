@@ -1,10 +1,12 @@
 import axios from 'axios';
 
 const API_URL = 'https://ecmaster.onrender.com';
-
+const Local_API_URL = 'http://127.0.0.1:5000'
 export const runTests = async (code, inputString, outputString) => {
     try {
-        const response = await axios.post(`${API_URL}/runtests`, { code, inputString, outputString });
+
+        console.log(code, inputString, outputString);
+        const response = await axios.post(`${Local_API_URL}/runtests`, { code, inputString, outputString });
      
         return { data: response.data, error: null };
     } catch (error) {

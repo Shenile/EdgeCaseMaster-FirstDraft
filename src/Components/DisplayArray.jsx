@@ -15,12 +15,13 @@ export default function DisplayArray({
   setInputCollection, setOutputCollection, code, 
   setResult, setQuicktest, isQuicktest, isloading, setIsLoading 
 }) {
-
+ 
   const [statuses, setStatuses] = useState([]);
   const [editIndex, setEditIndex] = useState(null); 
   const [editInput, setEditInput] = useState('');
   const [editOutput, setEditOutput] = useState('');
   const [shouldRunTests, setShouldRunTests] = useState(false);
+  const [tests_summary, setTestSummary] = useState({})
 
 
 
@@ -57,8 +58,8 @@ export default function DisplayArray({
         setIsLoading(false);
         showToast(response.error, 'error');
     } else {
-      
-        
+        setTestSummary(response.data.tests_summary);
+        console.log(tests_summary);
         setResult(response.data.results);
         setQuicktest(false);
         setIsLoading(false);
@@ -126,15 +127,24 @@ export default function DisplayArray({
     }
   };
 
-
+  const getStatusClassBorder = (status) =>{
+    switch (status) {
+      case 'Passed':
+        return 'border-green-300 bg-opacity-50';
+      case 'Failed':
+        return 'border-red-300 bg-opacity-50';
+      case 'Pending':
+        return 'border-yellow-300 bg-opacity-50';
+      default:
+        return 'border-gray-300 bg-opacity-50';
+    }
+  }
 
   return (
-    <div className="container mx-auto p-4 flex flex-col h-full tracking-wide">
-      <div className="flex justify-between items-center gap-4 text-base font-semibold mb-4">
-        <div className="flex items-center gap-2">
-          <h1 className='text-base text-gray-900'>Test Cases and Outputs</h1>
-         
-          
+    <div className="container mx-auto pt-0 py-4 flex flex-col h-full tracking-wide">
+      <div className="flex py-4 px-2 mb-4 bg-red-500 justify-between items-center gap-4 text-base font-semibold rounded-md">
+        <div className="flex items-center gap-2 ">
+          <h1 className='text-base text-gray-100'>Test Cases and Outputs</h1>
         </div>
         <button
           onClick={() => {
@@ -143,16 +153,33 @@ export default function DisplayArray({
             setResult([]);
             setQuicktest(false);
           }}
-          className="xs:px-2 xs:py-1  md:px-3 md:py-1 text-base text-white bg-red-500  hover:bg-red-600 shadow-md rounded-md"
+          className="xs:px-2 xs:py-1  md:px-3 md:py-1 text-base text-white bg-red-500  hover:bg-red-600 shadow-md rounded-md border border-gray-100"
         >
         Clear All
         </button>
       </div>
+
+      {(inputCollection.length === 0 && !(isQuicktest)) && (
+        // Render SVG when `inputCollection` is empty
+        <div className="flex flex-col justify-center items-center h-full px-4">
+          <img 
+            src="/Idle_Icon.svg" 
+            alt="IdleIcon" 
+            className="w-48 h-48"
+            />
+
+          <p className="text-gray-700 mt-4 text-center text-base">
+            No tests added yet. Start by adding a test case.
+          </p>
+        </div>
+      )}
+
+
       {isQuicktest ? (
         <>
         {(isloading) ? (( <LoadingCircle/>)):(
           <>
-        <div className='my-2 flex gap-2 items-center bg-red-500 bg-opacity-15 p-2 border rounded-md'>
+        <div className='my-2 flex gap-2 items-center bg-red-500 bg-opacity-15 px-4 p-2 border rounded-md'>
         <FontAwesomeIcon icon={faInfoCircle} className='p-2 text-yellow-700 text-opacity-75'/>
         <p className='text-sm tracking-wide leading-normal'>Please note that quick test results are dynamic and not stored permanently. 
         They will update based on the current data or inputs provided.
@@ -167,7 +194,7 @@ export default function DisplayArray({
       ) : (
       <>
        {(isloading) ? (<LoadingCircle/>): ( 
-        <div className="flex-grow overflow-auto">
+        <div className="flex-grow overflow-auto px-4 ">
           <div className="flex flex-col flex-wrap gap-4">
             {inputCollection.map((testCase, index) => {
               const expectedOutput = outputCollection[index];
@@ -177,20 +204,31 @@ export default function DisplayArray({
               return (
                 <div
                   key={index}
-                  className={`flex-1 md:min-w-[300px] xs:min-w-[150px] rounded-md shadow-lg p-4 border ${getStatusClass(status)}`}
+                  className={`flex-1 md:min-w-[300px] xs:min-w-[150px] rounded-md shadow-lg p-4 border ${getStatusClassBorder(status)} ${getStatusClass(status)}`}
                 > 
 
-                  <div className='flex justify-between'>
-                  <h2 className="text-base font-semibold mb-2">Test Case {index + 1}</h2>
-                  <div className='flex justify-end gap-2'>
-                  <button  className='px-2 bg-transperant text-gray-700 hover:bg-gray-300 rounded-md'
-                           onClick={()=> handleEdit(index)}>
-                   <FontAwesomeIcon icon={faEditRegular} />
-                   </button> 
-                   <button  className='px-2 bg-transperant text-red-500 hover:bg-gray-300 rounded-md' 
-                            onClick={()=> handleDelete(index)}>
-                   <FontAwesomeIcon icon={faTrashAltRegular} />
-                   </button> 
+                  <div className={`flex justify-between border-b ${getStatusClassBorder(status)} pb-2 mb-4`}>
+                
+                      <h2 className="text-base font-semibold self-center">Case {index + 1}</h2>
+                
+                    
+                    <div className='flex justify-end gap-2 px-2'>
+
+                      {
+                        status && 
+                          (<p className='px-2 text-gray-700 content-center'>Execution time : {testResult['execution_time'] + 'ms..'}</p>)
+                      }
+                      
+                      <button  className='p-2 bg-transperant text-gray-700 hover:bg-gray-300 rounded-md'
+                                onClick={()=> handleEdit(index)}>
+                        <FontAwesomeIcon icon={faEditRegular} />
+                      </button>
+
+                      
+                      <button  className='p-2 bg-transperant text-red-500 hover:bg-gray-300 rounded-md' 
+                                onClick={()=> handleDelete(index)}>
+                        <FontAwesomeIcon icon={faTrashAltRegular} />
+                      </button> 
             
                   </div>
                   
@@ -271,9 +309,12 @@ export default function DisplayArray({
         
        </> 
       )}
-        <div className='w-full px-4 py-2 mt-4 flex gap-4 justify-end'>
-          <TestButton label="Run all tests" onClick={runAllTests} className="w-fit h-8 text-white px-2 rounded-md " />
-        </div>
+      
+      <div className={`w-full px-4 py-2 pt-4 flex gap-4 justify-end items-center border-t border-gray-300`}>
+        <p>Passed : {tests_summary.passed}</p>
+        <p>Failed : {tests_summary.failed}</p>
+        <TestButton label="Run all tests" onClick={runAllTests} className="w-fit h-8 text-white px-2 rounded-md " />
+      </div>
         
     </div>
     

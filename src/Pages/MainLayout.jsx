@@ -58,10 +58,8 @@ export default function MainLayout() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         
-        <Route element={<PrivateRoute />}>
-            <Route path="/workspace" element={<WorkSpace />} />
-            <Route path="/documentation" element={<Documentation />} />
-        </Route>
+        <Route path="/workspace" element={<WorkSpace />} />
+        <Route path="/documentation" element={<Documentation />} />
         </Routes>
        
         </div>

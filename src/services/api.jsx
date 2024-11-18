@@ -6,7 +6,7 @@ export const runTests = async (code, inputString, outputString) => {
     try {
 
         console.log(code, inputString, outputString);
-        const response = await axios.post(`${Local_API_URL}/runtests`, { code, inputString, outputString });
+        const response = await axios.post(`${API_URL}/runtests`, { code, inputString, outputString });
      
         return { data: response.data, error: null };
     } catch (error) {

@@ -1,12 +1,14 @@
 import axios from 'axios';
 
 const API_URL = 'https://ecmaster.onrender.com';
-const Local_API_URL = 'http://127.0.0.1:5000'
+const Local_API_URL = 'http://127.0.0.1:5000';
+
+
 export const runTests = async (code, inputString, outputString) => {
     try {
 
-        console.log(code, inputString, outputString);
-        const response = await axios.post(`${API_URL}/runtests`, { code, inputString, outputString });
+        
+        const response = await axios.post(`${Local_API_URL}/runtests`, { code, inputString, outputString });
      
         return { data: response.data, error: null };
     } catch (error) {
@@ -33,5 +35,18 @@ export const runTests = async (code, inputString, outputString) => {
         }
         
         return { data: null, error: errorMsg };
+    }
+};
+
+
+export const generate_test_cases = async (code) => {
+    try {
+        const response = await axios.post(`${Local_API_URL}/ask_ai`, { code });
+        console.log('successfully got response', response);
+        return { data: response.data, err: null };
+    } catch (err) {
+        console.log('error occurred', err);
+        const errorMsg = err.response ? err.response.data.err : err.message;
+        return { data: null, err: errorMsg };
     }
 };

@@ -10,6 +10,7 @@ export default function WorkSpace() {
     const [input, setInput] = useState('');
     const [output, setOutput] = useState('');
     const [result, setResult] = useState([]);
+    
 
     const [inputCollection, setInputCollection] = useState([]);
     const [outputCollection, setOutputCollection] = useState([]);
@@ -19,10 +20,10 @@ export default function WorkSpace() {
     
 
     return (
-        <div className="flex flex-col h-full py-2">
+        <div className="bg-surface-a0 flex flex-col h-full py-2">
              
-            <div className="flex flex-col md:flex-row gap-2 items-center justify-center px-4 h-full md:overflow-hidden xs:overflow-auto">
-                <div className='px-4 py-4 w-full md:w-1/2 flex flex-col gap-4 border border-gray-400 rounded-md h-full'>
+            <div className="flex flex-col md:flex-row gap-4 items-center justify-center px-4 h-full md:overflow-hidden xs:overflow-auto">
+                <div className='bg-surface-a10 px-4 py-4 w-full md:w-1/2 flex flex-col gap-4 rounded-md h-full'>
                     <div className='px-2 flex flex-col h-full md:overflow-hidden xs:overflow-auto'>
                         <Code_Input setCode={setCode} />
                         <TestCase
@@ -54,6 +55,7 @@ export default function WorkSpace() {
                         quickTestResults={quickTestResults}
                         setIsLoading = {setIsLoading}
                         isloading={isloading}
+                       
                     />
                 </div>
             </div>

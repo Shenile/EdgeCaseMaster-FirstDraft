@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import TestCaseList from './TestCaseList';
 
-export default function QuickTestResult({ quickTestResults }) {
+export default function QuickTestResult({ quickTestResults, setTestSummary }) {
    
 
   const {tests_summary} = quickTestResults;
-
+  setTestSummary(tests_summary);
 
 
   return (    

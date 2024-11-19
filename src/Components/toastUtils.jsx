@@ -8,14 +8,14 @@ export const showToast = (message, type = 'info') => {
 
   switch (type) {
     case 'success':
-      className = 'shadow-md  text-green';
+      className = 'shadow-md text-gray-300 bg-navy-dark';
       break;
     case 'error':
-      className = 'shadow-2xl shadow-red-300 text-red';
+      className = 'shadow-lg shadow-burgundy text-gray-300 bg-navy-dark';
       break;
     case 'info':
     default:
-      className = 'bg-blue-500 text-white';
+      className = 'bg-blue-500 text-gray-300 bg-navy-dark';
       break;
   }
 

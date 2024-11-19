@@ -39,7 +39,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="relative flex items-center justify-between xs:h-8 sm:h-8 md:justify-center py-6 px-4 mt-2 border-b border-gray-300">
+    <nav className="bg-surface-a0 relative flex items-center justify-between xs:h-8 sm:h-8 md:justify-center py-6 pt-8 px-4  border-b border-surface-a10">
       <div className="flex items-center flex-1 md:absolute md:inset-y-0 md:left-0">
         <div className="flex items-center justify-between w-full md:w-auto">
           <button

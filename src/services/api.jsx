@@ -8,7 +8,7 @@ export const runTests = async (code, inputString, outputString) => {
     try {
 
         
-        const response = await axios.post(`${Local_API_URL}/runtests`, { code, inputString, outputString });
+        const response = await axios.post(`${API_URL}/runtests`, { code, inputString, outputString });
      
         return { data: response.data, error: null };
     } catch (error) {
@@ -41,7 +41,7 @@ export const runTests = async (code, inputString, outputString) => {
 
 export const generate_test_cases = async (code) => {
     try {
-        const response = await axios.post(`${Local_API_URL}/ask_ai`, { code });
+        const response = await axios.post(`${API_URL}/ask_ai`, { code });
         console.log('successfully got response', response);
         return { data: response.data, err: null };
     } catch (err) {

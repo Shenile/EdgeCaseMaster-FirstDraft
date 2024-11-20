@@ -10,6 +10,11 @@ export default function Code_Input({ setCode }) {
     setCode(value);
   };
 
+  const defaultCode = `
+  # example code 
+  def find_minimum(arr):
+      return min(arr)`
+
   return (
     <div className=' flex flex-col gap-2'>
       <p className='text-md  tracking-wide leading-normal text-gray-300 my-4'> <span className='font-semibold'>Instruction</span> : Ensure that all code is encapsulated within a function and that any necessary inputs are passed as arguments.</p>
@@ -20,6 +25,7 @@ export default function Code_Input({ setCode }) {
         
         theme="vs-dark" // You can choose other themes like 'vs-light'
         onChange={handleEditorChange}
+        defaultValue= {defaultCode}
         options={{
           fontSize: 16, // Adjust font size if needed
           fontFamily: 'JetBrains Mono, Fira Code, Source Code Pro, monospace',

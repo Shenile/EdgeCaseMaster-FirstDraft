@@ -23,3 +23,25 @@
     background-color: var(--scrollbar-track);
   }
   
+  @keyframes shake {
+    0% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-3px);
+    }
+    50% {
+      transform: translateX(3px);
+    }
+    75% {
+      transform: translateX(-2px);
+    }
+    100% {
+      transform: translateX(2px);
+    }
+  }
+  
+  .active-shake {
+    animation: shake 0.3s ease-in-out;
+  }
+  

@@ -4,6 +4,7 @@ import {
   faEdit as faEditRegular,
   faTrashAlt as faTrashAltRegular,
 } from "@fortawesome/free-regular-svg-icons";
+import { faPlayCircle, faList, faListCheck } from '@fortawesome/free-solid-svg-icons';
 import { ToastContainer } from "react-toastify";
 import { showToast } from "./toastUtils";
 import TestButton from "./Utils/TestButtons";
@@ -65,7 +66,6 @@ export default function DisplayArray({
         showToast(response.error, "error");
       } else {
         setTestSummary(response.data.tests_summary);
-        console.log(response.data);
         setResult(response.data.results);
         setQuicktest(false);
         setIsLoading(false);
@@ -123,32 +123,34 @@ export default function DisplayArray({
   const getStatusClass = (status) => {
     switch (status) {
       case "Passed":
-        return "bg-green-100 bg-opacity-50";
+        return "border-green-500 border-opacity-15";
       case "Failed":
-        return "bg-red-100 bg-opacity-50";
+        return "border-red-500 border-opacity-15";
       case "Pending":
-        return "bg-yellow-100 bg-opacity-50";
+        return "border-yellow-900 border-opacity-10";
       default:
-        return "bg-gray-100 bg-opacity-50";
+        return "border-gray-300 border-opacity-10";
     }
   };
 
   const getStatusClassBorder = (status) => {
     switch (status) {
       case "Passed":
-        return "border-green-900 bg-opacity-50";
+        return "border-green-500 border-opacity-15";
       case "Failed":
-        return "border-red-900 bg-opacity-50";
+        return "border-red-500 border-opacity-15";
       case "Pending":
-        return "border-yellow-900 bg-opacity-50";
+        return "border-yellow-900 border-opacity-10";
       default:
-        return "border-gray-600 bg-opacity-50";
+        return "border-gray-300 border-opacity-10";
     }
   };
 
   return (
-    <div className="container mx-auto pt-0 py-4 px-4 flex flex-col h-full tracking-wide">
-      <div className="flex py-4 px-4 mb-4 bg-navy justify-between items-center gap-4 text-base font-semibold rounded-md">
+    <div className="container mx-auto pt-0 pb-1 flex flex-col h-full tracking-wide">
+
+      {/* // The Header Block ., */}
+      <div className="flex py-4 px-4 mb-2 bg-surface-a10 justify-between items-center gap-4 text-base font-semibold rounded-md">
         <div className="flex items-center gap-2 ">
           <h1 className="text-base text-gray-100">Test Cases and Outputs</h1>
         </div>
@@ -160,16 +162,21 @@ export default function DisplayArray({
             setTestSummary({});
             setQuicktest(false);
           }}
-          className="xs:px-2 xs:py-1  md:px-3 md:py-1 text-base text-white bg-burgundy  hover:bg-red-800 shadow-md rounded-md"
+          className="md:px-3 md:py-2
+                     xs:px-2 xs:py-1 
+                     text-gray-300 border border-red-800 border-opacity-75
+                     rounded-full 
+                     hover:bg-red-800 hover:bg-opacity-75 shadow-md"
         >
           Clear All
         </button>
       </div>
-
-      {inputCollection.length === 0 && !isQuicktest && (
+      
+      {/* // Idle Image .., */}
+      {(inputCollection.length === 0 && !isQuicktest && !isloading) && (
         // Render SVG when `inputCollection` is empty
         <div className="flex flex-col justify-center items-center h-full px-4">
-          <img src="/Idle_Icon.svg" alt="IdleIcon" className="w-48 h-48" />
+          <img src="/Idle_Icon.svg" alt="IdleIcon" className="w-56 h-56" />
 
           <p className="text-gray-400 mt-4 text-center text-base">
             No tests added yet. Start by adding a test case.
@@ -207,7 +214,7 @@ export default function DisplayArray({
           {isloading ? (
             <LoadingCircle />
           ) : (
-            <div className="flex-grow overflow-auto px-4 mb-4 scrollbar-thin scrollbar-thumb-surface-a90 scrollbar-track-surface-a10">
+            <div className="flex-grow overflow-auto px-3 my-2 mb-4 scrollbar-thin scrollbar-thumb-surface-a90 scrollbar-track-surface-a10">
               <div className="flex flex-col flex-wrap gap-4 ">
                 {inputCollection.map((testCase, index) => {
                   const expectedOutput = outputCollection[index];
@@ -217,7 +224,7 @@ export default function DisplayArray({
                   return (
                     <div
                       key={index}
-                      className={`flex-1 md:min-w-[300px] xs:min-w-[150px] rounded-md text-gray-300 bg-surface-a90 shadow-lg border ${getStatusClassBorder(
+                      className={`flex-1 md:min-w-[300px] xs:min-w-[150px] rounded-md text-gray-300 bg-surface-a10 shadow-lg border ${getStatusClassBorder(
                         status
                       )} ${getStatusClass(status)} `}
                     >
@@ -252,14 +259,14 @@ export default function DisplayArray({
 
                         <div className="flex justify-end gap-2 px-2">
                           <button
-                            className="p-2 px-3 bg-transperant text-gold hover:bg-surface-a90 rounded-md"
+                            className="p-2 px-3 bg-transperant text-gold hover:bg-surface-a50 rounded-md"
                             onClick={() => handleEdit(index)}
                           >
                             <FontAwesomeIcon icon={faEditRegular} />
                           </button>
 
                           <button
-                            className="p-2 px-3 bg-transperant text-red-500 hover:bg-surface-a90 rounded-md"
+                            className="p-2 px-3 bg-transperant text-red-500 hover:bg-surface-a50 rounded-md"
                             onClick={() => handleDelete(index)}
                           >
                             <FontAwesomeIcon icon={faTrashAltRegular} />
@@ -360,7 +367,7 @@ export default function DisplayArray({
       )}
 
       <div
-        className={`w-full px-4 py-2 py-4 flex gap-4 items-center border-t border-surface-a70 
+        className={`w-full px-3 py-2 mt-0 flex gap-4 items-center 
                       ${
                         tests_summary &&
                         (tests_summary.passed || tests_summary.failed)
@@ -369,7 +376,13 @@ export default function DisplayArray({
                       }`}
       >
         {tests_summary && (tests_summary.passed || tests_summary.failed) && (
-          <div className="flex gap-2 text-gray-300 font-semibold font-code">
+          <div className="px-4
+                          flex gap-2 items-center 
+                          text-sm text-gray-300
+                          font-semibold font-code 
+                          w-fit h-full rounded-lg
+                          ">
+            <FontAwesomeIcon icon={faListCheck} className="mr-1 w-4 h-4 text-gold"/>                
             <p>{`TOTAL (`}</p>
             <p className="text-green-500">PASSED : {tests_summary.passed}</p>
             <p>{`,`}</p>
@@ -378,11 +391,13 @@ export default function DisplayArray({
           </div>
         )}
         <div>
-          <TestButton
-            label="Run all tests"
-            onClick={runAllTests}
-            className="w-fit h-8 text-white px-2 rounded-md "
-          />
+          <button
+          className="flex items-center text-gray-300 font-semibold px-4 py-3 rounded-full border border-gray-300 border-opacity-25
+                     hover:bg-white hover:bg-opacity-10"
+          onClick={runAllTests}>
+          <FontAwesomeIcon icon={faPlayCircle} className="mr-2 text-blue-600 w-6 h-6"/>Run All Tests
+          </button>
+        
         </div>
       </div>
     </div>

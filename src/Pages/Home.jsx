@@ -1,13 +1,21 @@
 import React from "react";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import FeatureList from "../Components/Home/Features";
+import { useState, useEffect } from "react";
+import ECMasterHomeAnimation from "../Components/Utils/ECMasterHomeAnimation";
 import { useNavigate } from "react-router-dom";
 import Footer from "../Components/Footer";
 
 export default function Home() {
   const navigate = useNavigate();
+
+  const [animate, setAnimate] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setAnimate((prev) => !prev); // Toggle animation at intervals
+    }, 2000); // Adjust the interval as needed (e.g., 2000ms = 2 seconds)
+
+    return () => clearInterval(interval); // Cleanup interval on component unmount
+  }, []);
 
   const features = [
     "Instant Coding Environment : Write your code and see the results immediately.",
@@ -17,36 +25,36 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex-grow lg:px-48 md:px-24 sm:px-8 xs:px-8">
-      <div className="flex lg:mb-8 md:mb-4 justify-center ">
-        <div className="pt-24 md:pt-8 
-                        xs:pt-8 p-4 
-                        flex flex-col justify-center items-center mx-auto">
+    <div className="flex-grow bg-surface-a0 lg:px-48 md:px-24 sm:px-8 xs:px-8">
+      {/* Hero */}
+      <div className="py-24 flex gap-2 items-center h-fit w-full">
+        {/* title and description */}
+        <div className="w-1/2 text-gray-300">
+          <h1 className="font-sg font-bold text-8xl">ecmaster</h1>
+          <div className="mx-2 my-4">
+            <ECMasterHomeAnimation />
+          </div>
 
-          <img src="/HeroImage.jpg" alt="" className="lg:w-60" />
-          <h2 className="xs:text-3xl md:text-4xl font-semibold ">
-            Welcome to EdgeCaseMaster!
-          </h2>
-          <p className="mt-4 text-lg text-center">
-            EdgeCaseMaster is your ultimate coding playground where you can
-            write, create, and test your code instantly. Develop your intuition
-            for edge cases and build robust code effortlessly.
+          <p className="tracking-wide py-4 font-sg text-xl text-gray-300">
+            A simple place to write your{" "}
+            <span className="text-blue-600">Python</span> code, create test
+            cases, and see how it all works.
           </p>
 
-          <div className="my-4">
-            <button
-              onClick={() => navigate("/workspace")}
-              className="bg-red-500 text-white py-2 px-4 rounded-lg text-base font-semibold hover:bg-red-700 transition duration-300"
-            >
-              Get Started{" "}
-              <FontAwesomeIcon icon={faArrowRight} className="mx-2" />
-            </button>
-          </div>
+          <button
+            onClick={() => navigate("/workspace")}
+            className={`text-lg underline font-code py-4 hover:text-blue-600
+              transform transition-all duration-300 ${
+              animate ? "active-shake" : "text-gray-300"
+            }`}
+          >
+            {"Get Started >>"}
+          </button>
         </div>
-      </div>
 
-      <div className="mb-12">
-        <FeatureList contents={features} />
+        <div className="w-1/2 h-auto">
+          <img src="/person-with-lap.png" alt="hero" className="w-68" />
+        </div>
       </div>
 
       <Footer />

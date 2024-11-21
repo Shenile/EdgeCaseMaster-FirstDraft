@@ -10,10 +10,7 @@ export default function Code_Input({ setCode }) {
     setCode(value);
   };
 
-  const defaultCode = `
-  # example code 
-  def find_minimum(arr):
-      return min(arr)`
+  const defaultCode = `# Write your function here..,`;
 
   return (
     <div className=' flex flex-col gap-2'>

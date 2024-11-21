@@ -98,7 +98,7 @@ const Navbar = () => {
           onClick={() => navigate("/documentation")}
           className={getActiveClass("/documentation")}
         >
-          Documentation
+          Docs
         </button>
         <button
           onClick={() => navigate("/about")}

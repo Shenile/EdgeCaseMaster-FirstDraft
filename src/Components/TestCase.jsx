@@ -92,6 +92,13 @@ export default function TestCase({
 
       // Fetch test cases from the API
       const response = await generate_test_cases(code);
+
+      // Check if response data is null or invalid
+      if (!response?.data) {
+        // If data is null, show the error message from response.err
+        throw new Error(response?.err || "No data received from the API.");
+      }
+
       const testCases = response?.data?.test_cases || [];
 
       // Extract inputs and expected outputs
@@ -101,11 +108,13 @@ export default function TestCase({
       // Update global collections
       inputCollection.push(...inputs);
       outputCollection.push(...outputs);
-
-      console.log("Received data", { inputs, outputs });
     } catch (error) {
-      const errorMessage = error.response?.data?.err || error.message;
-      showToast(errorMessage, "error");
+      // Check if error is a specific message or contains response.err
+      const errorMessage =
+        error?.message ||
+        error?.response?.data?.err ||
+        "An unknown error occurred.";
+      showToast(errorMessage, "error"); // Show error in toast
     } finally {
       setIsLoading(false);
     }
@@ -146,7 +155,10 @@ export default function TestCase({
           onClick={() => handleQuickTest(code, input, output)}
           className="px-4 py-3 flex gap-2 items-center border border-gray-300 border-opacity-25 rounded-full text-gray-300 hover:bg-white hover:bg-opacity-5 xs:mb-4 md:mb-0 md:text-base"
         >
-          <FontAwesomeIcon icon={faTachometerAlt} className="text-green-500 w-5 h-5" />
+          <FontAwesomeIcon
+            icon={faTachometerAlt}
+            className="text-green-500 w-5 h-5"
+          />
           Quick test
         </button>
 

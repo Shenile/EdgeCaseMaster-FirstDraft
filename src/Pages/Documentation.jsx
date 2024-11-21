@@ -9,7 +9,7 @@ export default function Documentation() {
     <div className='pt-8 bg-surface-a0 lg:px-48 md:px-24 sm:px-8 xs:px-8'>
     <CodeInputGuide/>
     <JsonFormat/>
-    {/* <Footer/> */}
+    
     </div>
     
   );

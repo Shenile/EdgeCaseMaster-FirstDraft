@@ -48,7 +48,7 @@ export default function MainLayout() {
           <Navbar />
         </div>
       )}
-        <div className={`flex-grow ${getContainerStyle()}`}>
+        <div className={`flex-grow ${getContainerStyle()} scrollbar-thin scrollbar-thumb-surface-a90 scrollbar-track-surface-a10`}>
         <ToastContainer/>
         <Routes>
         <Route path="/" element={<Home />} />

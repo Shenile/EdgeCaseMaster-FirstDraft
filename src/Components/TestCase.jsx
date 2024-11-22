@@ -11,6 +11,7 @@ import TestButton from "./Utils/TestButtons";
 import { runTests, generate_test_cases } from "../services/api";
 import { parseData } from "../utils/utils";
 
+
 const AIIcon = ({ color = "#800020", size = "20" }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -37,6 +38,7 @@ export default function TestCase({
   setIsLoading,
   setQuicktest,
   setTestSummary,
+  set_AI_LoadingBar
 }) {
   const handleAddTestCase = (input, output) => {
     setQuicktest(false);
@@ -89,6 +91,7 @@ export default function TestCase({
 
     try {
       setIsLoading(true);
+      set_AI_LoadingBar(true);
 
       // Fetch test cases from the API
       const response = await generate_test_cases(code);
@@ -117,6 +120,7 @@ export default function TestCase({
       showToast(errorMessage, "error"); // Show error in toast
     } finally {
       setIsLoading(false);
+      set_AI_LoadingBar(false);
     }
   };
 

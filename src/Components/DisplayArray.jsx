@@ -25,6 +25,7 @@ export default function DisplayArray({
   isQuicktest,
   isloading,
   setIsLoading,
+  ai_loading_bar
 }) {
   const [statuses, setStatuses] = useState([]);
   const [editIndex, setEditIndex] = useState(null);
@@ -32,6 +33,7 @@ export default function DisplayArray({
   const [editOutput, setEditOutput] = useState("");
   const [shouldRunTests, setShouldRunTests] = useState(false);
   const [tests_summary, setTestSummary] = useState({});
+  
 
   useEffect(() => {
     updateStatuses();
@@ -212,7 +214,7 @@ export default function DisplayArray({
       ) : (
         <>
           {isloading ? (
-            <LoadingCircle />
+            <LoadingCircle ai_loading_bar={ai_loading_bar}/>
           ) : (
             <div className="flex-grow overflow-auto px-3 my-2 mb-4 scrollbar-thin scrollbar-thumb-surface-a90 scrollbar-track-surface-a10">
               <div className="flex flex-col flex-wrap gap-4 ">
@@ -382,7 +384,7 @@ export default function DisplayArray({
                           font-semibold font-code 
                           w-fit h-full rounded-lg
                           ">
-            <FontAwesomeIcon icon={faListCheck} className="mr-1 w-4 h-4 text-gold"/>                
+                        
             <p>{`TOTAL (`}</p>
             <p className="text-green-500">PASSED : {tests_summary.passed}</p>
             <p>{`,`}</p>

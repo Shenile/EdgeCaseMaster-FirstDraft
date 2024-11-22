@@ -59,8 +59,8 @@ export default function JsonFormat() {
   ];
 
   return (
-    <div className="flex-grow text-gray-300">
-      <section className="mb-8">
+    <div className="flex-grow text-gray-300 mb-0">
+      <section className="">
         <h2 className="py-4 xs:text-lg md:text-2xl font-semibold mb-4 flex items-center">
           <FontAwesomeIcon icon={faBook} className="text-green-500 mr-3" />
           JSON Array Structure: Input Requirements and Output Examples

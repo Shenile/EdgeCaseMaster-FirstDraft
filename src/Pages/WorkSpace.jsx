@@ -17,6 +17,7 @@ export default function WorkSpace() {
     const [isQuicktest, setQuicktest] = useState(false);
     const [quickTestResults, setQuickTestResults] = useState([]);
     const [isloading, setIsLoading] = useState(false)
+    const [ai_loading_bar, set_AI_LoadingBar] = useState(false);
     
 
     return (
@@ -36,6 +37,7 @@ export default function WorkSpace() {
                             output={output}
                             setResult={setResult}
                             setIsLoading = {setIsLoading}
+                            set_AI_LoadingBar= {set_AI_LoadingBar}
                             setQuicktest={setQuicktest}
                             quickTestResults={quickTestResults}
                         />
@@ -54,6 +56,7 @@ export default function WorkSpace() {
                         result={result}
                         quickTestResults={quickTestResults}
                         setIsLoading = {setIsLoading}
+                        ai_loading_bar= {ai_loading_bar}
                         isloading={isloading}
                        
                     />

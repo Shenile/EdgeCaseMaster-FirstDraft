@@ -8,29 +8,44 @@ export default function Home() {
   const [animate, setAnimate] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageSource, setImageSource] = useState(""); // Initialize with an empty string
+  const [imageLoadTime, setImageLoadTime] = useState(0); // Store the image load time
 
-  // Toggle animation every 2 seconds
+  // Simulate delayed image loading and measure load time
   useEffect(() => {
-    const interval = setInterval(() => {
-      setAnimate((prev) => !prev); 
-    }, 2000); // Adjust interval to your needs
+    const startTime = Date.now(); // Get the start time of the image loading
+    const img = new Image(); // Create a new Image object
+    img.src = "/person-with-lap.png"; // Set the image source
+    
+    // Once the image loads, calculate the load time
+    img.onload = () => {
+      const loadDuration = Date.now() - startTime; // Calculate how much time it took to load the image
+      setImageSource("/person-with-lap.png"); // Set the image source
+      setImageLoadTime(loadDuration); // Store the load time
+      setImageLoaded(true); // Mark the image as loaded
+    };
 
-    return () => clearInterval(interval); // Clean up interval on component unmount
+    // Optionally, handle image load error
+    img.onerror = () => {
+      console.error("Image failed to load.");
+    };
+    
   }, []);
 
-  // Simulate delayed image loading
+  // Toggle animation every based on the image load time
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setImageSource("/person-with-lap.png"); // Set the image source after 1 second
-    }, 500);
+    if (imageLoadTime > 0) {
+      const interval = setInterval(() => {
+        setAnimate((prev) => !prev); 
+      }, imageLoadTime); // Use the image load time as the interval for animation
 
-    return () => clearTimeout(timer); // Cleanup the timer on component unmount
-  }, []);
+      return () => clearInterval(interval); // Clean up interval on component unmount
+    }
+  }, [imageLoadTime]); // Re-run the interval whenever the image load time changes
 
   return (
-    <div className="flex-grow bg-surface-a0 lg:px-48 md:px-24 sm:px-8 xs:px-8">
+    <div className="min-h-[calc(100vh-56px)] flex flex-col bg-surface-a0 lg:px-48 md:px-24 sm:px-8 xs:px-8">
       {/* Hero Section */}
-      <div className="py-24 flex gap-2 items-center h-fit w-full">
+      <div className="flex-grow py-24 flex gap-2 items-center h-full w-full">
         {/* Title and Description */}
         <div className="w-1/2 text-gray-300">
           <h1 className="font-sg font-bold text-8xl">ecmaster</h1>
@@ -53,7 +68,7 @@ export default function Home() {
 
         {/* Image or Skeleton Loader */}
         <div className="w-1/2 h-auto flex justify-center items-center">
-          {!imageSource ? (
+          {!imageLoaded ? (
             // Show skeleton loader while the image is loading
             <img
               src="/skeleton-img.png"
@@ -65,7 +80,6 @@ export default function Home() {
               src={imageSource}
               alt="hero"
               className={`w-68 transition-opacity duration-300 ${imageLoaded ? "opacity-100" : "opacity-0"}`}
-              onLoad={() => setImageLoaded(true)} // Set imageLoaded to true when the image is fully loaded
             />
           )}
         </div>

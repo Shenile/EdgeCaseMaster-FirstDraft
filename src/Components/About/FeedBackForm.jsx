@@ -3,7 +3,7 @@ import { dbFirestore } from '../firebaseConfig'; // Import the Firestore instanc
 import { doc, setDoc } from 'firebase/firestore';
 import { showToast } from '../toastUtils';
 
-const FeedbackForm = () => {
+const FeedbackForm = ({ onFeedbackSubmit }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [feedback, setFeedback] = useState('');
@@ -26,6 +26,7 @@ const FeedbackForm = () => {
       setName('');
       setEmail('');
       setFeedback('');
+      onFeedbackSubmit();
     } catch (error) {
       setIsLoading(false);
       showToast('Error submitting feedback. Please try again.', 'error');

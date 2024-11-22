@@ -9,13 +9,18 @@ import Navbar from '../Components/Navbar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import WorkSpace from './WorkSpace';
 import PrivateRoute from '../Components/PrivateRoute'; // Adjust the path as needed
-
+import { toast } from 'react-toastify';
 import Login from '../Components/Login';
 import SignUp from '../Components/Signup';
 
 export default function MainLayout() {
     const [showNavbar, setShowNavbar] = useState(true);
     const currentRoute = useCurrentRoute();
+
+    useEffect(() => {
+      // Clear all toasts on route change
+      toast.dismiss();
+    }, [location.pathname]);
    
     const getContainerStyle = () => {
       switch (currentRoute) {
@@ -60,7 +65,10 @@ export default function MainLayout() {
         
         <Route path="/workspace" element={<WorkSpace />} />
         <Route path="/documentation" element={<Documentation />} />
+        
         </Routes>
+
+        
        
         </div>
        

@@ -20,26 +20,14 @@ const Section = ({ title, children, isActive }) => {
 };
 
 const AboutUs = () => {
-  const [currentSection, setCurrentSection] = useState(0);
+  const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
 
-  const sections = [
-    {
-      title: 'About the Project',
-      content: 'This project was created as a solo side project to solve a common problem I faced as a developer. It aims to make coding easier and more intuitive, especially for those just starting out.'
-    },
-    {
-      title: 'Development Notice',
-      content: 'The tool is currently in its early stages and is focused on working with array data types. I\'m continuously working on expanding its features and improving its functionality.'
-    },
-    {
-      title: 'Feedback',
-      content: 'Your feedback is crucial to improving the tool. Feel free to share your thoughts as you explore and use the platform.'
-    },
-    {
-      title: 'Feedback Form',
-      content: <FeedBackForm />
-    }
-  ];
+  const handleFeedbackSubmit = () => {
+    setFeedbackSubmitted(true);
+
+    // Reset feedbackSubmitted after a delay
+    setTimeout(() => setFeedbackSubmitted(false), 3000);
+  };
   
   return (
     <div class="relative font-sg">
@@ -60,7 +48,7 @@ const AboutUs = () => {
         </div>
         
         <div className='h-fit'>
-        <FeedBackForm/>
+        <FeedBackForm onFeedbackSubmit={handleFeedbackSubmit}/>
         </div>
         
     </div>
